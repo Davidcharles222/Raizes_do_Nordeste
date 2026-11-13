@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  email       String   @unique
+  senhaHash   String
+  perfil      String
+  dataCriacao DateTime @default(now())
+  pedidos Pedido[]
+}
+
+model Produto {
+  id          Int     @id @default(autoincrement())
+  nome        String
+  descricao   String?
+  preco       Decimal
+  disponivel  Boolean @default(true)
+  itens ItemPedido[]
+}
+
+model Pedido {
+  id          Int      @id @default(autoincrement())
+  usuarioId   Int
+  canalPedido CanalPedido
+  status      String
+  valorTotal  Decimal
+  dataCriacao DateTime @default(now()) 
+  usuario Usuario @relation(fields: [usuarioId], references: [id]) 
+  itens ItemPedido[]
+  pagamento Pagamento?
+}
+
+model ItemPedido {
+  id            Int     @id @default(autoincrement())
+  pedidoId      Int
+  produtoId     Int
+  quantidade    Int
+  precoUnitario Decimal
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
+}
+
+model Pagamento {
+  id             Int       @id @default(autoincrement())
+  pedidoId       Int       @unique
+  valor          Decimal
+  formaPagamento String
+  status         String
+  dataPagamento  DateTime?
+  pedido Pedido @relation(fields: [pedidoId], references: [id])
+}
+
+enum CanalPedido {
+  APP
+  TOTEM
+  BALCAO
+  PICKUP
+  WEB
+}
