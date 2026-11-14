@@ -89,7 +89,7 @@ A API possui rotas protegidas por autenticação JWT e operações administrativ
 
 ## 🧪 Testes realizados
 
-Foram realizados **10 testes utilizando o Postman**, contemplando operações bem-sucedidas e situações de erro.
+Foram realizados **11 testes utilizando o Postman**, contemplando operações bem-sucedidas e situações de erro.
 
 Os testes abrangeram:
 
@@ -97,6 +97,7 @@ Os testes abrangeram:
 - Consulta de produtos disponíveis.
 - Criação e consulta de pedidos.
 - Simulação de pagamento aprovado.
+- Simulação de pagamento recusado.
 - Validação de respostas HTTP `400`, `401`, `403` e `404`.
 
 As evidências dos testes foram registradas por meio de capturas de tela, e a coleção de requisições foi exportada em formato JSON.
