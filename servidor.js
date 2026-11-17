@@ -694,11 +694,7 @@ app.get("/pedidos", autenticar, async (req, res) => {
 
     return res.status(200).json(pedidos);
 
-    // Validar o canal informado.
-    // Filtrar os pedidos pelo canal, quando informado.
-    // Garantir que o cliente veja somente seus pedidos.
-    // Consultar os registros com prisma.pedido.findMany().
-    // Retornar os pedidos com res.json().
+    
   } catch (erro) {
     console.error(erro);
     return res.status(500).json({
